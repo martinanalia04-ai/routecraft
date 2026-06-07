@@ -1,7 +1,7 @@
 import { useTrips } from '../context/TripContext'; // Importamos el hook
 
 export const TripList = () => {
-  // Aquí es donde ocurre la magia: obtenemos los datos y la función de borrar del contexto
+  
   const { trips, deleteTrip } = useTrips();
 
   return (
