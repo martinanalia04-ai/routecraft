@@ -6,6 +6,6 @@ export interface Trip {
   startDate: string;
   endDate: string;
   budget: number;
-  status: 'planned' | 'ongoing' | 'completed';
+  status: 'Planificado' | 'En Curso' | 'Completado';
   description?: string;
 }

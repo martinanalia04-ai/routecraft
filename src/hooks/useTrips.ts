@@ -1,0 +1,1 @@
+export { useTrips } from '../context/TripContext';
