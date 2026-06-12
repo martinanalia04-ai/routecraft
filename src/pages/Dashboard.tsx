@@ -79,14 +79,14 @@ export default function Dashboard() {
     setAuthLoading(true);
     try {
       if (authMode === 'login') {
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const response = await supabase.auth.signInWithPassword({
           email,
           password,
         });
-        if (error) throw error;
+        if (response.error) throw response.error;
         
         // Obtenemos el nombre asignado al usuario desde su metadata de Supabase (o usamos la primera parte del correo si no existe)
-        const userDisplayName = data.user?.user_metadata?.username || email.split('@')[0];
+        const userDisplayName = response.data.user?.user_metadata?.username || email.split('@')[0];
         setLoggedInUser(userDisplayName);
       } else {
         const { error } = await supabase.auth.signUp({
@@ -584,13 +584,13 @@ export default function Dashboard() {
                 </div>
               )}
 
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
-                <div className={`lg:col-span-6 grid border border-slate-300 rounded focus-within:border-[#511365] bg-white ${
-                  activeTab === 'hoteles' || (activeTab === 'coches' && !differentDropOff) ? 'grid-cols-1' : 'grid-cols-2'
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3">
+                <div className={`sm:col-span-2 lg:col-span-6 grid border border-slate-300 rounded focus-within:border-[#511365] bg-white ${
+                  activeTab === 'hoteles' || (activeTab === 'coches' && !differentDropOff) ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'
                 }`}>
                   <input type="text" required value={origin} onChange={(e) => {setOrigin(e.target.value); setHasSearched(false);}} placeholder={activeTab === 'hoteles' ? "¿Dónde te vas a alojar?" : activeTab === 'coches' ? "Oficina de recogida del coche" : "¿Desde dónde sales? (Origen)"} className="p-2.5 text-sm outline-none font-medium text-slate-800 bg-transparent w-full" />
                   {(activeTab !== 'hoteles' && (activeTab !== 'coches' || differentDropOff)) && (
-                    <input type="text" required value={destination} onChange={(e) => {setDestination(e.target.value); setHasSearched(false);}} placeholder={activeTab === 'coches' ? "Oficina de devolución" : "¿A dónde vas? (Destino)"} className="p-2.5 border-l border-slate-200 text-sm outline-none font-medium text-slate-800 bg-transparent w-full" />
+                    <input type="text" required value={destination} onChange={(e) => {setDestination(e.target.value); setHasSearched(false);}} placeholder={activeTab === 'coches' ? "Oficina de devolución" : "¿A dónde vas? (Destino)"} className="p-2.5 border-t md:border-t-0 md:border-l border-slate-200 text-sm outline-none font-medium text-slate-800 bg-transparent w-full" />
                   )}
                 </div>
 
@@ -610,9 +610,9 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="mt-4 flex justify-end gap-3">
-                <button type="button" onClick={handleClearSearch} className="bg-slate-100 text-slate-600 font-bold py-2 px-5 rounded-full border-none cursor-pointer text-xs uppercase">Limpiar</button>
-                <button type="submit" className="bg-[#511365] text-white font-bold py-2 px-6 rounded-full border-none cursor-pointer text-xs uppercase">Planificar {activeTab}</button>
+              <div className="mt-4 flex flex-col-reverse sm:flex-row justify-end gap-3">
+                <button type="button" onClick={handleClearSearch} className="w-full sm:w-auto bg-slate-100 text-slate-600 font-bold py-3 sm:py-2 px-5 rounded-full border-none cursor-pointer text-xs uppercase text-center">Limpiar</button>
+                <button type="submit" className="w-full sm:w-auto bg-[#511365] text-white font-bold py-3 sm:py-2 px-6 rounded-full border-none cursor-pointer text-xs uppercase text-center">Planificar {activeTab}</button>
               </div>
             </div>
           </form>
