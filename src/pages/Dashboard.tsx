@@ -89,7 +89,7 @@ export default function Dashboard() {
         const userDisplayName = data.user?.user_metadata?.username || email.split('@')[0];
         setLoggedInUser(userDisplayName);
       } else {
-        const { data, error } = await supabase.auth.signUp({
+        const { error } = await supabase.auth.signUp({
           email,
           password,
           options: {
