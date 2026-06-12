@@ -374,13 +374,13 @@ export default function Dashboard() {
             <span className="text-emerald-400 text-xl">🌐</span>
             <span className="text-white font-bold text-xl tracking-tight">RouteCraft</span>
           </div>
-          <nav className="hidden lg:flex items-center gap-5 text-xs font-bold uppercase">
-            {['vuelos', 'hoteles', 'vuelo-hotel-coche', 'trenes', 'coches'].map((t) => (
-              <button key={t} type="button" onClick={() => {setActiveTab(t); setHasSearched(false);}} className={`bg-transparent border-none text-white cursor-pointer ${activeTab === t ? 'border-b-2 border-white' : 'opacity-80'}`}>
-                {t === 'vuelo-hotel-coche' ? '💎 Combo Pack' : t}
-              </button>
-            ))}
-          </nav>
+         <nav className="flex items-center gap-4 text-xs font-bold uppercase overflow-x-auto whitespace-nowrap scrollbar-hide max-w-[200px] sm:max-w-none">
+  {['vuelos', 'hoteles', 'vuelo-hotel-coche', 'trenes', 'coches'].map((t) => (
+    <button key={t} type="button" onClick={() => {setActiveTab(t); setHasSearched(false);}} className={`bg-transparent border-none text-white cursor-pointer ${activeTab === t ? 'border-b-2 border-white' : 'opacity-80'}`}>
+      {t === 'vuelo-hotel-coche' ? '💎 Combo' : t}
+    </button>
+  ))}
+</nav>
         </div>
 
         {/* CONTROLES DE LA DERECHA (SOPORTE DE SALUDO DINÁMICO) */}
@@ -563,16 +563,16 @@ export default function Dashboard() {
 
           {/* BUSCADOR (BOTÓN PLANIFICAR ASOCIADO A REQUERIMIENTO MANTENIMIENTO) */}
           <form onSubmit={handleSearchSubmit} className="relative z-10">
-            <div className="flex items-end gap-1 overflow-x-auto">
-              {['vuelos', 'hoteles', 'vuelo-hotel-coche', 'trenes', 'coches'].map((tab) => (
-                <button 
-                  key={tab} type="button" onClick={() => { setActiveTab(tab); setHasSearched(false); setDifferentDropOff(false); }}
-                  className={`px-5 py-3 rounded-t-md font-bold text-sm capitalize whitespace-nowrap border-none cursor-pointer ${activeTab === tab ? 'bg-white text-slate-900 border-t-4 border-[#511365]' : 'bg-white/70 text-slate-700'}`}
-                >
-                  {tab === 'vuelos' && '✈️ Vuelos'} {tab === 'hoteles' && '🏨 Hoteles'} {tab === 'vuelo-hotel-coche' && '💎 Combo Pack'} {tab === 'trenes' && '🚂 Trenes'} {tab === 'coches' && '🚗 Coches'}
-                </button>
-              ))}
-            </div>
+<div className="flex items-end gap-1 overflow-x-auto pb-1 scrollbar-hide">
+  {['vuelos', 'hoteles', 'vuelo-hotel-coche', 'trenes', 'coches'].map((tab) => (
+    <button 
+      key={tab} type="button" onClick={() => { setActiveTab(tab); setHasSearched(false); setDifferentDropOff(false); }}
+      className={`px-4 py-2 rounded-t-md font-bold text-xs capitalize whitespace-nowrap border-none cursor-pointer flex-shrink-0 ${activeTab === tab ? 'bg-white text-slate-900 border-t-4 border-[#511365]' : 'bg-white/70 text-slate-700'}`}
+    >
+      {tab === 'vuelos' && '✈️ Vuelos'} {tab === 'hoteles' && '🏨 Hoteles'} {tab === 'vuelo-hotel-coche' && '💎 Combo'} {tab === 'trenes' && '🚂 Trenes'} {tab === 'coches' && '🚗 Coches'}
+    </button>
+  ))}
+</div>
 
             <div className="bg-white rounded-b-md rounded-tr-md p-6 shadow-2xl border border-slate-100 font-sans">
               {activeTab === 'coches' && (
